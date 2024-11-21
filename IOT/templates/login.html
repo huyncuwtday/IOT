@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Lights Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            background-color: white;
+        }
+        header {
+            background-color: #008CBA;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            border-radius: 0 0 8px 8px;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+        }
+        .form-box {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+        label {
+            flex: 1;
+            margin-right: 1rem;
+        }
+        input {
+            flex: 2;
+            padding: 0.5rem;
+            border: 1px solid black;
+            border-radius: 4px;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        button {
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+        button:hover {
+            background-color: #007399;
+        }
+        .forgot-password {
+            color: #008CBA;
+            text-decoration: none;
+        }
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        /* Styling for flash messages */
+        .flash-message {
+            padding: 1rem;
+            background-color: #ffcccc;
+            color: #ff0000;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .flash-message.success {
+            background-color: #ccffcc;
+            color: #009900;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Smart Lights</h1>
+    </header>
+    <div class="container">
+        <div class="form-box">
+            <!-- Display flash messages if any -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-message {% for category, message in messages %}{{ category }}{% endfor %}">
+                        {% for category, message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <!-- Form đăng nhập -->
+            <form action="{{ url_for('login') }}" method="POST">
+                <div class="form-group">
+                    <label for="phone">Số điện thoại:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mật khẩu:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="button-container">
+                    <button type="submit">Đăng nhập</button>
+                    <a href="{{ url_for('forgot_password') }}" class="forgot-password">Quên mật khẩu?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
