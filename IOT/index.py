@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)  
 
 # Thông tin kết nối MQTT
-mqtt_server = " 10.21.95.158"  
+mqtt_server = " 192.168.132.68"  
 mqtt_port = 1883              
 mqtt_user = "admin"           
 mqtt_password = "admin"       
